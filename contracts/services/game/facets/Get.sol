@@ -4,10 +4,7 @@ import {Data} from "../Data.sol";
 import {Modifiers} from "../shared/Modifiers.sol";
 
 contract Get is Modifiers {
-
-    function test_get() public view (uint){
+    function test_get() public view returns (uint) {
         return $.score;
     }
-
-
 }

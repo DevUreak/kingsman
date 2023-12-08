@@ -14,7 +14,7 @@ interface IDiamondContract {
 }
 
 abstract contract DiamondFacade is DiamondAuth, DiamondLoupe {
-    using DiamondContractManager for bytes32;
+    using DiamondManager for bytes32;
 
     constructor(
         string memory _key,

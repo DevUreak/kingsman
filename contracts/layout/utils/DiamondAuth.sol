@@ -5,8 +5,8 @@ import {DiamondBase} from "./DiamondBase.sol";
 import {DiamondManager} from "../DiamondManager.sol";
 
 abstract contract DiamondAuth is DiamondBase {
-    using DiamondContractManager for bytes32;
-    using DiamondContractManager for DiamondContractManager.Data;
+    using DiamondManager for bytes32;
+    using DiamondManager for DiamondManager.Data;
 
     constructor(bool _diamond) {
         if (_diamond) {
@@ -15,7 +15,7 @@ abstract contract DiamondAuth is DiamondBase {
             f[1] = 0x8da5cb5b;
             f[2] = 0xb84614a5;
             f[3] = 0x13af4035;
-            DiamondContractManager.internalCut(f, "auth");
+            DiamondManager.internalCut(f, "auth");
         }
     }
 

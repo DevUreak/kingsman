@@ -5,8 +5,8 @@ import {IDiamond} from "../interfaces/IDiamond.sol";
 import {DiamondManager} from "../DiamondManager.sol";
 
 abstract contract DiamondBase {
-    using DiamondContractManager for bytes32;
-    using DiamondContractManager for DiamondContractManager.Data;
+    using DiamondManager for bytes32;
+    using DiamondManager for DiamondManager.Data;
 
     bytes32 immutable _this;
 

@@ -5,8 +5,8 @@ import {DiamondBase} from "./DiamondBase.sol";
 import {DiamondManager} from "../DiamondManager.sol";
 
 abstract contract DiamondLoupe is DiamondBase {
-    using DiamondContractManager for bytes32;
-    using DiamondContractManager for DiamondContractManager.Data;
+    using DiamondManager for bytes32;
+    using DiamondManager for DiamondManager.Data;
 
     constructor(bool _diamond) {
         if (_diamond) {
@@ -23,7 +23,7 @@ abstract contract DiamondLoupe is DiamondBase {
             f[9] = 0xc0a43a7c;
             f[10] = 0x01ffc9a7;
             f[11] = 0xc33470d3;
-            DiamondContractManager.internalCut(f, "loupe");
+            DiamondManager.internalCut(f, "loupe");
         }
     }
 
@@ -31,7 +31,7 @@ abstract contract DiamondLoupe is DiamondBase {
         public
         view
         virtual
-        returns (DiamondContractManager.Facet[] memory)
+        returns (DiamondManager.Facet[] memory)
     {
         address payable diamond = _this.diamond().addr;
         return
@@ -42,7 +42,7 @@ abstract contract DiamondLoupe is DiamondBase {
 
     function facets(
         bytes32 _contract
-    ) public view virtual returns (DiamondContractManager.Facet[] memory) {
+    ) public view virtual returns (DiamondManager.Facet[] memory) {
         return _contract.getFacets();
     }
 

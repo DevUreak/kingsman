@@ -4,8 +4,8 @@ pragma solidity ^0.8.22;
 import {IDiamond} from "./interfaces/IDiamond.sol";
 
 library DiamondManager {
-    using DiamondContractManager for bytes32;
-    using DiamondContractManager for DiamondContractManager.Data;
+    using DiamondManager for bytes32;
+    using DiamondManager for DiamondManager.Data;
 
     bytes32 constant base = keccak256("diamond");
 

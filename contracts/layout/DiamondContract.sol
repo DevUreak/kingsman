@@ -8,8 +8,8 @@ import {DiamondLoupe} from "./utils/DiamondLoupe.sol";
 import {DiamondManager} from "./DiamondManager.sol";
 
 abstract contract DiamondContract is DiamondAuth, DiamondLoupe {
-    using DiamondContractManager for bytes32;
-    using DiamondContractManager for DiamondContractManager.Data;
+    using DiamondManager for bytes32;
+    using DiamondManager for DiamondManager.Data;
 
     constructor(
         string memory _key,
@@ -20,11 +20,7 @@ abstract contract DiamondContract is DiamondAuth, DiamondLoupe {
         _this.setAccess(address(this), true);
         _this.diamond().addr = payable(address(this));
 
-        DiamondContractManager.diamondCut(
-            _diamondCut,
-            _args.init,
-            _args.initCalldata
-        );
+        DiamondManager.diamondCut(_diamondCut, _args.init, _args.initCalldata);
     }
 
     function facet(bytes4 _funct) public virtual returns (address) {
