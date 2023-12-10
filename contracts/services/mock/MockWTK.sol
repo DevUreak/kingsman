@@ -4,6 +4,6 @@ import "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
 contract MockWTK is ERC20 {
     constructor() ERC20("WTK Token", "WTK") {
-        _mint(msg.sender, 1000000 * 10 ** decimals());
+        _mint(msg.sender, 100000000 * 10 ** decimals());
     }
 }
