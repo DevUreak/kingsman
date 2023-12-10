@@ -4,5 +4,5 @@ pragma solidity ^0.8.22;
 // import {Type} from "modules/history/types/Type.sol";
 
 interface Errors {
-
+    error NO_PERMISSION(address);
 }
