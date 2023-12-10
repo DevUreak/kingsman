@@ -2,7 +2,7 @@
 pragma solidity ^0.8.22;
 
 import {Modifier} from "../shared/Modifier.sol";
-import {IERC20} from "contract/interfaces/IERC20.sol";
+import {IERC20} from "contracts/interfaces/IERC20.sol";
 
 contract Manage is Modifier {
     // 저축량
