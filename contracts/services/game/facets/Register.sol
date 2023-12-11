@@ -26,6 +26,6 @@ contract Register is Modifier {
         $.nonce = _nonce;
         $.startTime = block.timestamp;
 
-        IWorld($.owner).setKingdomUpdate($.playingEvent, _count);
+        IWorld($.world).setKingdomUpdate($.playingEvent, _count);
     }
 }

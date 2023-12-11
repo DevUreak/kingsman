@@ -6,12 +6,19 @@ import { IWorld } from 'contracts/services/world/IWorld.sol';
 import { IGame } from 'contracts/services/game/IGame.sol';
 import { Type } from 'contracts/types/Type.sol';
 
+import 'hardhat/console.sol';
+
 contract Claim is Modifier {
-    // 현재 리워드
-    function harvest(bool keeper) public view returns (uint) {
+    // 수확
+    function harvest() public view returns (uint) {
         Type.WorldEvent memory events = IWorld($.world).getWorldEvent($.playingEvent);
         uint joined = IWorld($.world).joinedCastleState($.playingEvent); // 함께하는 왕국들
         uint weight; // 파밍속도
+
+        Type.KingdomList[] memory kingdoms = IWorld($.world).getKingdomGame($.playingEvent);
+        console.log('debug');
+        console.log(kingdoms.length);
+        return 1;
 
         // for (uint i = 0; i < joined; i++) {
         //     weight =

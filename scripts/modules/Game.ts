@@ -14,6 +14,7 @@ export interface IGameModule extends AccountLike {
     createHintNumber : (_target:number, _interval:number) => Promise<any[]>;
     createHintHased : (_target:number, _interval:number, _nonce:string) => Promise<any[]>;
     startGame : (_target:any, _count:any, _minHint:any[], _maxHint:any[], _nonce:string) => Promise<any>;
+    harvest : ()=> Promise<number>;
     contract: BaseContract;
 }
 
@@ -36,18 +37,17 @@ export default async function Game(game: string | BaseContract & any): Promise<I
             return await game.startGame(_target,_count,_minHint,_maxHint,_nonce);
         };
 
-        // function startGame(
-        //     bytes32 _target,
-        //     bytes32 _count,
-        //     bytes32[] memory _minHint,
-        //     bytes32[] memory _maxHint,
-        //     string memory _nonce
+        const harvest = async (): Promise<number> => {
+            return await game.harvest();
+        };
+
 
         return {
             address,
             createHintNumber,
             createHintHased,
             startGame,
+            harvest,
             contract: game
         }as IGameModule;
     }

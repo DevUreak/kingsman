@@ -12,4 +12,6 @@ interface IWorld {
     function joinedCastleState(uint _event) external view returns (uint);
 
     function setKingdomUpdate(uint _event, uint _count) external;
+
+    function getKingdomGame(uint _event) external view returns (Type.KingdomList[] memory);
 }

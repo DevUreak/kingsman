@@ -52,4 +52,9 @@ contract Manage is Modifier {
             revert Errors.NOT_AVAILABLE(owner);
         }
     }
+
+    // 게임정보 조회
+    function getKingdomGame(uint _event) public view returns (Type.KingdomList[] memory) {
+        return $.playingKingdomList[_event];
+    }
 }
