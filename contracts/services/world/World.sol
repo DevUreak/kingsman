@@ -10,10 +10,13 @@ contract World is DiamondContract {
     Data.Storage internal $;
 
     constructor(
+        address _mainToken,
         IDiamond.Cut[] memory _diamondCut,
         IDiamond.Args memory _args
     ) DiamondContract("WHOISTHEKING.WORLD", _diamondCut, _args) {
         $.permission[msg.sender] = true;
         $.operate = true;
+        $.minAmount = 1000 * 10 ** 18;
+        $.mainToken = _mainToken;
     }
 }

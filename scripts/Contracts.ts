@@ -9,8 +9,8 @@ import { AddressString } from '@coinmeca/ethers/types';
 import Kingdom, { IKingdom } from './modules/Kingdom';
 
 export interface DeployedContracts {
-    Game: IGame;
-    World: IWorld;
+    Game:  (_target:AddressString) => Promise<IGame>;
+    World: (_wtk:any) => Promise<IWorld>;
     Kingdom: (_target:AddressString) => Promise<IKingdom>;
     [x: string | number | symbol]: unknown
 }
@@ -20,31 +20,15 @@ export let contracts:any = {}
 export async function Contracts(): Promise<DeployedContracts> {
     const { User } = await Accounts();
 
-    const game = async (): Promise<IGame> => {
-        if (!contracts?.game) {
-            contracts.game = await Game(
-                await diamond.factory(
-                    'contracts/services/game/Game.sol:Game',
-                    [
-                        Facets.game,
-                        {
-                            owner: a(User(0)),
-                            init: a(0),
-                            initCalldata: a(0)
-                        }
-                    ]
-                )
-            );
-        }
-        return contracts.game;
-    };
 
-    const world = async (): Promise<IWorld> => {
+
+    const world = async (_wtk:any): Promise<IWorld> => {
         if (!contracts?.world) {
             contracts.world = await World(
                 await diamond.factory(
                     'contracts/services/world/World.sol:World',
                     [
+                        _wtk,
                         Facets.world,
                         {
                             owner: a(User(0)),
@@ -52,7 +36,8 @@ export async function Contracts(): Promise<DeployedContracts> {
                             initCalldata: a(0)
                         }
                     ]
-                )
+                ),
+                
             );
         }
         return contracts.world;
@@ -64,9 +49,15 @@ export async function Contracts(): Promise<DeployedContracts> {
         );
     };
 
+    const game = async (_target:AddressString): Promise<IGame> => {
+        return await Game(
+            await ethers.getContractAt(await diamond.abi('Game'), _target)
+        );
+    };
+
     return {
-        Game: await game(),
-        World: await world(),
+        Game: game,
+        World: world,
         Kingdom : kingdom
     };
 }

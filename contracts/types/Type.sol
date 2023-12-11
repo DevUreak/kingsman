@@ -15,5 +15,13 @@ interface Type {
         uint start; // 시작 시간
         uint duration; // 이벤트 기간
         State state; // 이벤트 상태
+        //uint totalCounts; // 왕국 해시 통합 카운트
+    }
+
+    // 참여중인 게임 정보
+    struct KingdomList {
+        address kingdom;
+        uint count;
+        bool state;
     }
 }

@@ -1,14 +1,4 @@
 export const Facets = {
-    game: [
-        {
-            key: 'WHOISTHEKING.GAME',
-            data: [
-                'contracts/services/game/facets/Get.sol:Get',
-                'contracts/services/game/facets/Set.sol:Set',
-                'contracts/layout/facets/CutFacet.sol:CutFacet'
-            ]
-        }
-    ],
 
     world: [
         {
@@ -16,6 +6,7 @@ export const Facets = {
             data: [
                 'contracts/services/world/facets/Create.sol:Create',
                 'contracts/services/world/facets/Manage.sol:Manage',
+                'contracts/services/world/facets/Register.sol:Register',
                 'contracts/layout/facets/CutFacet.sol:CutFacet'
             ]
         },
@@ -23,8 +14,19 @@ export const Facets = {
             key: 'WHOISTHEKING.KINGDOM',
             data: [
                 'contracts/services/kingdom/facets/Manage.sol:Manage',
+                'contracts/services/kingdom/facets/Register.sol:Register',
+                'contracts/services/kingdom/facets/Create.sol:Create',
             ]
         },
+        {
+            key: 'WHOISTHEKING.GAME',
+            data: [
+                'contracts/services/game/facets/Register.sol:Register',
+                'contracts/services/game/facets/Generation.sol:Generation',
+                'contracts/services/game/facets/Manage.sol:Manage',
+                'contracts/layout/facets/CutFacet.sol:CutFacet'
+            ]
+        }
     ],
 
     reserve: [

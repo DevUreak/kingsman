@@ -13,7 +13,7 @@ export interface IWorld extends IWorldModule {
 export interface IWorldModule extends AccountLike {
     openWorldEvent: (_amount:number, _start:number, _duration:number) => Promise<any>;
     getWorldEvent: (_index: number) => Promise<any>;
-    createCastle : (_name:string, _owner:AccountLike) => Promise<any>;
+    createCastle : (_name:string) => Promise<any>;
     getCastle :(_index:number) => Promise<string>
     contract: BaseContract;
 }
@@ -33,8 +33,8 @@ export default async function World(world: string | BaseContract & any): Promise
             return await world.getWorldEvent(_index);
         };
 
-        const createCastle = async (_name:string, _owner:AccountLike): Promise<any> => {
-            return await world.createCastle(_name, a(_owner));
+        const createCastle = async (_name:string): Promise<any> => {
+            return await world.createCastle(_name);
         };
 
         const getCastle = async (_index:number): Promise<string> => {
