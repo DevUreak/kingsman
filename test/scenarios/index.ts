@@ -8,7 +8,7 @@ export default describe('# Scenarios Test', () => {
 
     it('Initialize', async () => {
         const init = await Contracts();
-        const { Game, World, Kingdom } = init;
+        const { Game, World, Kingdom, Reserve } = init;
         const WTK = await (await ethers.getContractFactory('MockWTK')).deploy();
         
         const { User } = await Accounts();
@@ -29,11 +29,15 @@ export default describe('# Scenarios Test', () => {
 
             })
 
-            it('world : check', async () => {
-                const world = await World(await WTK.getAddress());
-                // 이벤트 생성
+            it('Game Setting', async () => {
+                const reserve = await Reserve(await WTK.getAddress());
+                const world = await World(await WTK.getAddress(), reserve.address);
+                await reserve.setWorld(world.address);
+
+                const day = 86400;
+                // 베스팅 이벤트 생성
                 const now:any = (await ethers.provider.getBlock('latest'))?.timestamp;
-                await world.use(User(0)).openWorldEvent(1000,now!,10000);
+                await world.use(User(0)).openWorldEvent(1000, now!, day * 7);
                 
                 // 왕국 건설
                 const amount = ethers.parseUnits('1000', 18);
@@ -75,7 +79,7 @@ export default describe('# Scenarios Test', () => {
                 // //왕국 게임 시작
                  await GAME.startGame(
                     ethers.keccak256(ethers.encodeBytes32String('1000')),
-                    ethers.keccak256(ethers.encodeBytes32String('3')), 
+                    3, 
                     min,
                     max,
                     'KING01'
@@ -96,13 +100,16 @@ export default describe('# Scenarios Test', () => {
                 //왕국 게임 시작
                 await GAME1.use(User(1)).startGame(
                     ethers.keccak256(ethers.encodeBytes32String('1000')),
-                    ethers.keccak256(ethers.encodeBytes32String('4')), 
+                    4, 
                     min1,
                     max1,
                     'KING01'
                 );
 
                  //왕국 이벤트 참여와 동시 게임 생성 --#2 User2
+                 await ethers.provider.send("evm_increaseTime", [600]); // 1hr
+                 await ethers.provider.send("evm_mine");
+
                  await kingdom2.use(User(2)).openKingGame(0,'FIRST_GAME_2');
                  const gameaddress2:any = await kingdom2.infoKingGame(0);
                  const GAME2 = await Game(gameaddress2);
@@ -110,21 +117,31 @@ export default describe('# Scenarios Test', () => {
                  await kingdom2.use(User(2)).setGamePermission(GAME2.address, User(2).address ,true);
                  
                  const hashed2 = await GAME2.createHintHased(1000, 5, 'KING02'); 
-                 const min2=  Array.from(hashed1[0]);
-                 const max2 = Array.from(hashed1[1]);
+                 const min2=  Array.from(hashed2[0]);
+                 const max2 = Array.from(hashed2[1]);
  
                  //왕국 게임 시작
                  await GAME2.use(User(2)).startGame(
                      ethers.keccak256(ethers.encodeBytes32String('1000')),
-                     ethers.keccak256(ethers.encodeBytes32String('5')), 
+                     5, 
                      min2,
                      max2,
                      'KING02'
                  );
-
-                 await GAME.harvest();
+                 await ethers.provider.send("evm_increaseTime", [36000]); // 1hr
+                 await ethers.provider.send("evm_mine");
+                // total 1000 
+                // 왕국 0 : 속도 : 3  == 250
+                // 왕국 1 : 속도 : 4  == 333
+                // 왕국 2 : 속도 : 5  == 500
+                // 총 속도 : 12 
+                 console.log(await GAME.yields());
+                 console.log(await GAME1.yields());
+                 console.log(await GAME2.yields());
                 
-                
+              
+                 
+    
 
     
             });

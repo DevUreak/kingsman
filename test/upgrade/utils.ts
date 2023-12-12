@@ -11,9 +11,6 @@ export async function getSelectors(contract: any) {
             selectors.push(selector.slice(0, 10));
         }
     }
-    selectors.contract = contract;
-    selectors.remove = remove;
-    selectors.get = get;
     return selectors;
 }
 

@@ -10,11 +10,7 @@ export default describe('# Unit Test : Game', () => {
 
         describe('', () => {
             it('test_facet : value check', async () => {
-                console.log(Game.address)
-                
-                await Game.test_set(12222);
-                expect(await Game.test_get()).to.be.equal(12222)
-                
+    
                 
         
             

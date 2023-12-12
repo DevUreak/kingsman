@@ -26,7 +26,7 @@ export default async function World(world: string | BaseContract & any): Promise
 
 
         const openWorldEvent = async (_amount:number, _start:number, _duration:number): Promise<any> => {
-            return await world.openWorldEvent(_amount,_start,_duration);
+            return await world.openWorldEvent(ethers.parseUnits(_amount.toString(), 18),_start,_duration);
         };
 
         const getWorldEvent = async (_index: number): Promise<any> => {

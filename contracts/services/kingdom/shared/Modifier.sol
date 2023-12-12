@@ -1,8 +1,8 @@
 // SPDX-License-Identifier: GPL-3.0-only
 pragma solidity ^0.8.22;
 
-import {Data} from "./Data.sol";
-import {Errors} from "contracts/types/Errors.sol";
+import { Data } from './Data.sol';
+import { Errors } from 'contracts/types/Errors.sol';
 
 abstract contract Modifier {
     using Data for Data.Storage;

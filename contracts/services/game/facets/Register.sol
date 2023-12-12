@@ -4,6 +4,7 @@ pragma solidity ^0.8.22;
 import { Errors } from 'contracts/types/Errors.sol';
 import { Modifier } from '../shared/Modifier.sol';
 import { IWorld } from 'contracts/services/world/IWorld.sol';
+import { IReserve } from 'contracts/services/reserve/IReserve.sol';
 
 import 'hardhat/console.sol';
 
@@ -27,5 +28,6 @@ contract Register is Modifier {
         $.startTime = block.timestamp;
 
         IWorld($.world).setKingdomUpdate($.playingEvent, _count);
+        IReserve($.reserve).kingGameApprove($.playingEvent);
     }
 }

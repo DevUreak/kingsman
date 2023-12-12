@@ -27,6 +27,10 @@ contract Manage is Modifier {
         return $.state;
     }
 
+    function reserve() public view returns (address) {
+        return $.reserve;
+    }
+
     // 왕국 상태 설정 // world만 가능
     function setState(bool _state) public {
         if (msg.sender != $.world) revert Errors.NO_PERMISSION(msg.sender);

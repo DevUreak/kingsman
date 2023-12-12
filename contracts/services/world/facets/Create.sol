@@ -20,11 +20,11 @@ contract Create is Modifier {
     function createCastle(string memory _name) public payable {
         if (IERC20($.mainToken).balanceOf(msg.sender) < $.minAmount) revert Errors.INSUFFICIENT_AMOUNT();
 
-        address kingdom = address(new Kingdom(_name, msg.sender, address(this)));
+        address kingdom = address(new Kingdom(_name, msg.sender, $.reserve, $.mainToken, address(this)));
         $.kingdoms[$.kcounts] = kingdom;
         $.kcounts++;
 
-        IERC20($.mainToken).transferFrom(msg.sender, kingdom, $.minAmount);
+        IERC20($.mainToken).transferFrom(msg.sender, $.reserve, $.minAmount);
         emit Events.createCastle(block.timestamp, msg.sender);
     }
 }

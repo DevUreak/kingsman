@@ -7,4 +7,8 @@ interface IKingdom {
     function setState(bool _state) external;
 
     function getGame(string memory _title) external view returns (uint);
+
+    function reserve() external view returns (address);
+
+    function owner() external view returns (address);
 }

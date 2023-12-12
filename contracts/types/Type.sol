@@ -24,4 +24,17 @@ interface Type {
         uint count;
         bool state;
     }
+
+    // 번호
+    struct Checker {
+        address owner;
+        bool state;
+    }
+
+    struct Staker {
+        uint amount;
+        bool staking; // true : staking, false : unstaking
+        uint claimTime; // 언스 예정일
+        uint claimAmount; // 언스 양
+    }
 }

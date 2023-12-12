@@ -5,10 +5,7 @@ import { Errors } from 'contracts/types/Errors.sol';
 
 contract Generation {
     // 힌트 생성
-    function createHintNumber(
-        uint64 _target,
-        uint8 _count
-    ) public pure returns (uint64[] memory minHint, uint64[] memory maxHint) {
+    function createHintNumber(uint64 _target, uint8 _count) public pure returns (uint64[] memory, uint64[] memory) {
         if (_count < 2) revert Errors.LOW_VALUE(_count);
 
         unchecked {
@@ -52,7 +49,7 @@ contract Generation {
         uint64 _target,
         uint8 _count,
         string memory nonce
-    ) public pure returns (bytes32[] memory minHint, bytes32[] memory maxHint) {
+    ) public pure returns (bytes32[] memory, bytes32[] memory) {
         if (_count < 2) revert Errors.LOW_VALUE(_count);
 
         unchecked {

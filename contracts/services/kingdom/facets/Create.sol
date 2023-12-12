@@ -11,7 +11,7 @@ contract Create is Modifier {
     // 게임 오픈
     function openKingGame(uint _event, string memory _title) public permission {
         if (!IWorld($.world).joinedCastleState(_event, address(this))) revert Errors.NOT_AVAILABLE(address(this)); // 왕국이 _event에 등록되어있는지 확인
-        $.games[$.gcounts] = address(new Game($.world, _event, _title));
+        $.games[$.gcounts] = address(new Game($.world, _event, $.reserve, _title, $.rToken));
         $.gcounts++;
     }
 }

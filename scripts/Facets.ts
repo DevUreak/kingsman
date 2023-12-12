@@ -34,7 +34,8 @@ export const Facets = {
         {
             key: 'WHOISTHEKING.RESERVE',
             data: [
-                'contracts/services/world/facets/Manage.sol:Manage',
+                'contracts/services/reserve/facets/Manage.sol:Manage',
+                'contracts/services/reserve/facets/Staking.sol:Staking',
                 'contracts/layout/facets/CutFacet.sol:CutFacet'
             ]
         }

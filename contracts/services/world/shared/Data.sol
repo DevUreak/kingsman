@@ -16,5 +16,6 @@ library Data {
         uint gcounts; // 게임갯수
         uint minAmount; // 건국 토큰 갯수
         address mainToken;
+        address reserve;
     }
 }
