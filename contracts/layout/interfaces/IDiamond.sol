@@ -26,17 +26,7 @@ interface IDiamond {
         bytes initCalldata;
     }
 
-    /// @notice Add/replace/remove any number of functions and optionally execute
-    ///         a function with delegatecall
-    /// @param _diamondCut Contains the facet addresses and function selectors
-    /// @param _init The address of the contract or facet to execute _calldata
-    /// @param _calldata A function call, including function selector and arguments
-    ///                  _calldata is executed with delegatecall on _init
-    function diamondCut(
-        Cut[] calldata _diamondCut,
-        address _init,
-        bytes calldata _calldata
-    ) external;
+    function diamondCut(Cut[] calldata _diamondCut, address _init, bytes calldata _calldata) external;
 
     error NoSelectorsGivenToAdd();
     error AccessDenied(address _sender);
@@ -49,20 +39,13 @@ interface IDiamond {
     error CannotAddFunctionToDiamondThatAlreadyExists(bytes4 _selector);
     error CannotReplaceFunctionsFromFacetWithZeroAddress(bytes4[] _selectors);
     error CannotReplaceImmutableFunction(bytes4 _selector);
-    error CannotReplaceFunctionWithTheSameFunctionFromTheSameFacet(
-        bytes4 _selector
-    );
+    error CannotReplaceFunctionWithTheSameFunctionFromTheSameFacet(bytes4 _selector);
     error CannotReplaceFunctionThatDoesNotExists(bytes4 _selector);
     error RemoveFacetAddressMustBeZeroAddress(address _facetAddress);
     error RemoveFacetAddressNotFound(address _facetAddress);
     error Connot(bytes4 _selector);
     error CannotRemoveFunctionThatDoesNotExist(bytes4 _selector);
-    error CannotRemoveFunctionFromFacetAddressThatDoesNotExist(
-        address _facetAddress
-    );
+    error CannotRemoveFunctionFromFacetAddressThatDoesNotExist(address _facetAddress);
     error CannotRemoveImmutableFunction(bytes4 _selector);
-    error InitializationFunctionReverted(
-        address _initializationContractAddress,
-        bytes _calldata
-    );
+    error InitializationFunctionReverted(address _initializationContractAddress, bytes _calldata);
 }

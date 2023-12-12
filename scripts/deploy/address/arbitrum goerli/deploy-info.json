@@ -1,0 +1,7 @@
+{
+    "network": "Arbitrum",
+    "contracts": {
+        "reserve": "0x43f9F0Ea774eEE2304c6104A2aE07c73A279c7da",
+        "world": "0x0F55FCb9821E6FE3682b656bEfb15C4e8ef89183"
+    }
+}
