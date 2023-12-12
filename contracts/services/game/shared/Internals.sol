@@ -9,7 +9,11 @@ library Utils {
         return $.checked[$.target].state;
     }
 
-    function getHased(uint number) internal view returns (bytes32) {
-        return keccak256(abi.encodePacked(number));
+    function getHased(uint64 _number) internal view returns (bytes32) {
+        return keccak256(abi.encodePacked(_number));
+    }
+
+    function getHased(uint64 _number, string memory _nonce) internal view returns (bytes32) {
+        return keccak256(abi.encodePacked(_number, _nonce));
     }
 }

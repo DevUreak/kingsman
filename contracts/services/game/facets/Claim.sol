@@ -11,8 +11,6 @@ import { IKingdom } from 'contracts/services/kingdom/IKingdom.sol';
 import { Data } from '../shared/Data.sol';
 import { Events } from '../shared/Events.sol';
 
-import 'hardhat/console.sol';
-
 contract Claim is Modifier {
     using Utils for Data.Storage;
 
@@ -22,7 +20,7 @@ contract Claim is Modifier {
         Type.WorldEvent memory worldEvent = IWorld($.world).getWorldEvent($.playingEvent);
         if ($.harvested) revert Errors.ALREADY_HARVESTED();
         if (block.timestamp < (worldEvent.start + worldEvent.duration)) revert Errors.NOT_YET(); // 게임이 끝난 여부 확인
-        if ($.checkNumber()) revert Errors.WAS_LOOTED(); // 약탈자 에게 강탈 당했는지 확인
+        if ($.checkNumber() && IKingdom($.owner).owner() == msg.sender) revert Errors.WAS_LOOTED(); // 약탈자 에게 강탈 당했는지 확인
         if (IKingdom($.owner).owner() != msg.sender && $.checked[$.target].owner != msg.sender)
             revert Errors.NO_PERMISSION(msg.sender); // 왕국 소유자 또는 번호를 찾은 권한있는 약탈자가 수행했는지 확인
 
@@ -55,7 +53,6 @@ contract Claim is Modifier {
 
             // 제시간에 참여 못한 왕국 계산
             if ($.startTime - worldEvent.start > 600) {
-                console.log('in');
                 uint loss = ($.startTime - worldEvent.start) * (kingdomAmount / worldEvent.duration);
                 return kingdomAmount = ((kingdomAmount / worldEvent.duration) * (time - $.startTime)) - loss;
             } else {

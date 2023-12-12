@@ -59,7 +59,6 @@ export default async function Kingdom(kingdom: string | BaseContract & any): Pro
         const setGamePermission = async (_target:any,_account:any,_state:any): Promise<any> => {
             return await kingdom.setGamePermission(_target, _account, _state);
         };
-
     
         return {
             address,

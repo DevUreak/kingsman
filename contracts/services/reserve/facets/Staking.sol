@@ -11,7 +11,7 @@ contract Staking is Modifier {
     // 스테이킹
     function staking(uint _amount) public payable {
         if ($.period == 0) revert Errors.NOT_POSSIBLE();
-        if (IERC20($.rToken).balanceOf(msg.sender) > _amount) revert Errors.INSUFFICIENT_AMOUNT();
+        if (IERC20($.rToken).balanceOf(msg.sender) < _amount) revert Errors.INSUFFICIENT_AMOUNT();
 
         $.staker[msg.sender] = Type.Staker(_amount, true, 0, 0);
 

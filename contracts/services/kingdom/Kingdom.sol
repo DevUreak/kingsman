@@ -5,7 +5,6 @@ import { DiamondFacade } from 'contracts/layout/DiamondFacade.sol';
 import { IDiamond } from 'contracts/layout/interfaces/IDiamond.sol';
 import { DiamondManager } from 'contracts/layout/DiamondManager.sol';
 import { Data } from './shared/Data.sol';
-import 'hardhat/console.sol';
 
 // Fascade factory
 contract Kingdom is DiamondFacade {

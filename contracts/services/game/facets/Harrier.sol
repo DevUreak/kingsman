@@ -12,16 +12,16 @@ import { Events } from '../shared/Events.sol';
 import { Utils } from '../shared/Internals.sol';
 import { Data } from '../shared/Data.sol';
 
-import 'hardhat/console.sol';
-
 contract Harrier is Modifier {
     using Utils for Data.Storage;
+    using Utils for uint64;
 
     // 힌트및 정답 찾기
-    function searchHint(uint _number) public view returns (bool state, bytes32 target, bool discovery) {
+    function searchHint(uint64 _number) public view returns (bool state, bytes32 target, bool discovery) {
         if (!IReserve(IKingdom($.owner).reserve()).isStaking(msg.sender)) revert Errors.NOT_POSSIBLE(); // 스테이킹 여부 체크
 
         target = keccak256(abi.encodePacked(_number, $.nonce));
+
         for (uint i = 0; i < $.minHint.length; i++) {
             if ($.minHint[i] == target) {
                 return (true, target, false);
@@ -33,6 +33,7 @@ contract Harrier is Modifier {
                 return (true, target, false);
             }
         }
+
         if (target == $.target) {
             return (true, target, true);
         }
@@ -72,5 +73,13 @@ contract Harrier is Modifier {
     // check target number
     function checkNumber() public view returns (bool) {
         return $.checkNumber();
+    }
+
+    function hasedNumber(uint64 _target) public view returns (bytes32) {
+        return _target.getHased();
+    }
+
+    function hasedNumber(uint64 _target, string memory _nonce) public view returns (bytes32) {
+        return _target.getHased(_nonce);
     }
 }

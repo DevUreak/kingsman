@@ -7,8 +7,6 @@ import { Errors } from 'contracts/types/Errors.sol';
 import { IGame } from 'contracts/services/game/IGame.sol';
 import { IERC20 } from 'contracts/interfaces/IERC20.sol';
 
-import 'hardhat/console.sol';
-
 contract Manage is Modifier {
     // operate 조회
     function getOperate() public view returns (bool) {

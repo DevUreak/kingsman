@@ -6,13 +6,11 @@ import { Modifier } from '../shared/Modifier.sol';
 import { IWorld } from 'contracts/services/world/IWorld.sol';
 import { IReserve } from 'contracts/services/reserve/IReserve.sol';
 
-import 'hardhat/console.sol';
-
 contract Register is Modifier {
     // 게임 시작
     function startGame(
         bytes32 _target,
-        uint _count,
+        uint8 _count,
         bytes32[] memory _minHint,
         bytes32[] memory _maxHint,
         string memory _nonce
@@ -26,7 +24,6 @@ contract Register is Modifier {
         $.setup = true;
         $.nonce = _nonce;
         $.startTime = block.timestamp;
-
         IWorld($.world).setKingdomUpdate($.playingEvent, _count);
         IReserve($.reserve).kingGameApprove($.playingEvent);
     }

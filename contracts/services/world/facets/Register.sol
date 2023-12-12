@@ -6,8 +6,6 @@ import { Modifier } from '../shared/Modifier.sol';
 import { IKingdom } from 'contracts/services/kingdom/IKingdom.sol';
 import { Type } from 'contracts/types/Type.sol';
 
-import 'hardhat/console.sol';
-
 contract Register is Modifier {
     // 왕국 이벤트 참여, 왕국 컨트랙트를 통해서 참여해야함
     function joinTheKingdom(uint _event) public {

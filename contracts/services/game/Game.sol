@@ -4,7 +4,6 @@ pragma solidity ^0.8.22;
 import { DiamondFacade } from 'contracts/layout/DiamondFacade.sol';
 import { IDiamond } from 'contracts/layout/interfaces/IDiamond.sol';
 import { Data } from './shared/Data.sol';
-import 'hardhat/console.sol';
 
 contract Game is DiamondFacade {
     using Data for Data.Storage;

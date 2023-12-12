@@ -8,7 +8,6 @@ import { IKingdom } from 'contracts/services/kingdom/IKingdom.sol';
 import { IERC20 } from 'contracts/interfaces/IERC20.sol';
 import { Errors } from 'contracts/types/Errors.sol';
 import { Events } from '../shared/Events.sol';
-import 'hardhat/console.sol';
 
 contract Create is Modifier {
     // 이벤트 오픈

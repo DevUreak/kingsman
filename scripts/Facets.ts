@@ -23,6 +23,7 @@ export const Facets = {
             data: [
                 'contracts/services/game/facets/Register.sol:Register',
                 'contracts/services/game/facets/Generation.sol:Generation',
+                'contracts/services/game/facets/Harrier.sol:Harrier',
                 'contracts/services/game/facets/Claim.sol:Claim',
                 'contracts/services/game/facets/Manage.sol:Manage',
                 'contracts/layout/facets/CutFacet.sol:CutFacet'
